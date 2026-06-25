@@ -1,73 +1,13 @@
-# ==============================================================================
-# PROJECT: Automated Physical Security Incident & Log Analyzer
-# AUTHOR: Christian Udodi Chinedu
-# DESCRIPTION: A Python script applying statistical logic to parse facility 
-#              access logs and isolate operational security anomalies.
-# ==============================================================================
+# Automated Physical Security Incident & Log Analyzer
 
-# Simulated raw facility log data: [Timestamp, Employee ID, Access Point, Status]
-# Status codes: 200 = Success, 403 = Unauthorized Attempt
-security_logs = [
-    ["08:15", "EMP023", "Main Lobby", 200],
-    ["08:22", "EMP104", "Server Room", 403],  # Anomaly
-    ["09:00", "EMP088", "Main Lobby", 200],
-    ["23:15", "EMP999", "Back Exit", 403],    # Anomaly (Late night)
-    ["09:30", "EMP104", "Server Room", 200],
-    ["11:45", "EMP211", "Finance Vault", 403], # Anomaly
-    ["13:00", "EMP023", "Main Lobby", 200],
-    ["14:15", "EMP088", "Server Room", 200],
-    ["02:10", "EMP511", "Loading Dock", 403], # Anomaly (Late night)
-]
+## Project Overview
+This repository contains a core Python application engineered to process, filter, and statistically evaluate physical access control data within high-security facilities. The script parses sequential data matrices to isolate systematic infrastructure vulnerabilities, bridging my professional history in physical security operations with technical data science applications.
 
-def analyze_unauthorized_attempts(logs):
-    """
-    Parses logs to isolate and extract security breaches (Status 403).
-    """
-    failed_attempts = []
-    for log in logs:
-        # Check the 4th element (index 3) which represents the status code
-        if log[3] == 403:
-            failed_attempts.append(log)
-    return failed_attempts
+## Technical Competencies Demonstrated
+* **Data Scoping & Filtering:** Programmatic parsing of structured arrays mimicking multi-field security access databases.
+* **Statistical Ratio Modeling:** Quantitative evaluation of network anomaly densities against standard active baselines.
+* **Control Flow Operations:** Application of functional modular programming practices using strict criteria validation.
 
-def calculate_anomaly_rate(total_logs, total_failed):
-    """
-    Applies basic statistical ratio modeling to determine 
-    the overall system vulnerability baseline.
-    """
-    if total_logs == 0:
-        return 0.0
-    
-    rate = (total_failed / total_logs) * 100
-    return round(rate, 2)
+## Academic Context
+This utility serves as practical portfolio execution leveraging foundational concepts mastered during my **IBM Python for Data Science** and **IBM Statistics 101** modules. It confirms my readiness to apply programmatic solutions to mathematical and industrial analytics domains.
 
-def main():
-    print("==================================================")
-    print("     STARTING DIGITAL SECURITY LOG ANALYZER       ")
-    print("==================================================\n")
-    
-    total_records = len(security_logs)
-    failed_records = analyze_unauthorized_attempts(security_logs)
-    total_failures = len(failed_records)
-    
-    # Compute the statistical failure rate across the dataset
-    failure_rate = calculate_anomaly_rate(total_records, total_failures)
-    
-    print(f"[INFO] Total Access Logs Processed: {total_records}")
-    print(f"[INFO] Total Anomalies/Breaches Isolated: {total_failures}")
-    print(f"[STATISTICS] Current System Anomaly Rate: {failure_rate}%\n")
-    
-    print("--------------------------------------------------")
-    print("CRITICAL ALERT LOGS (STATUS 403 - ACTIONS REQUIRED):")
-    print("--------------------------------------------------")
-    
-    for alert in failed_records:
-        print(f"⏰ TIME: {alert[0]} | 👤 ID: {alert[1]} | 🚪 LOCATION: {alert[2]} -> [ACCESS DENIED]")
-        
-    print("\n==================================================")
-    print("             LOG ANALYSIS COMPLETE                ")
-    print("==================================================")
-
-if __name__ == "__main__":
-    main()
-    
